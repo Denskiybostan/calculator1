@@ -37,4 +37,10 @@ class CalculatorApplicationTests {
 
 	}
 
+	public void shouldReturnCorrectResultOfDivide() {
+		assertEquals(out.divide(9, 3), 3);
+		assertEquals(out.divide(-9, 3), -3);
+
+	}
+
 }
