@@ -4,6 +4,7 @@ import Service.CalculatorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 @SpringBootTest
@@ -36,11 +37,34 @@ class CalculatorApplicationTests {
 		assertEquals(out.multiply(0,5), 0);
 
 	}
-
+	@Test
 	public void shouldReturnCorrectResultOfDivide() {
 		assertEquals(out.divide(9, 3), 3);
 		assertEquals(out.divide(-9, 3), -3);
-
+	}
+	@Test
+	public void shouldThrowIllegalArgumentExceptionWhenDividingByZero() {
+		assertThrows(IllegalArgumentException.class, () -> out.divide(1, 0));
+	}
+	@Test
+	public void shouldThrowIllegalArgumentExceptionWhenNumberDivideByNull() {
+		assertThrows(RuntimeException.class, () -> out.divide(1, null));
+		assertThrows(RuntimeException.class, () -> out.divide(null, null));
+	}
+	@Test
+	public void shouldThrowIllegalArgumentExceptionWhenNumberMultiplyByNull() {
+		assertThrows(RuntimeException.class, () -> out.multiply(1, null));
+		assertThrows(RuntimeException.class, () -> out.multiply(null, null));
+	}
+	@Test
+	public void shouldThrowIllegalArgumentExceptionWhenNumberMinusByNull() {
+		assertThrows(RuntimeException.class, () -> out.minus(1, null));
+		assertThrows(RuntimeException.class, () -> out.minus(null, null));
+	}
+	@Test
+	public void shouldThrowIllegalArgumentExceptionWhenNumberPlusByNull() {
+		assertThrows(RuntimeException.class, () -> out.plus(1, null));
+		assertThrows(RuntimeException.class, () -> out.plus(null, null));
 	}
 
 }

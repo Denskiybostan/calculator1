@@ -1,6 +1,8 @@
 package Controller;
 
 import Service.CalculatorService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -11,27 +13,33 @@ public class CalculatorController {
         this.service = service;
     }
     // /calculator/plus?num1=5
-    public String minus(Integer num1, Integer num2) {
-        if (num1 == null || num2 == null) {
-            return "Один из аргументов не передан";
-        }
+    @GetMapping("/calculator")
+    public String hello() {
+        return "Добро пожаловать в калькулятор";
+    }
+
+    // /calculator/plus?num1=5&num2=5
+    @GetMapping("/calculator/plus")
+    public String plus(@RequestParam Integer num1, @RequestParam Integer num2) {
+        return num1 + " + " + num2 + " = " + service.plus(num1, num2);
+    }
+
+    @GetMapping("/calculator/minus")
+    public String minus(@RequestParam Integer num1, @RequestParam Integer num2) {
         return num1 + " - " + num2 + " = " + service.minus(num1, num2);
     }
 
-    // /calculator/plus?num1=5
-    public String multiply(Integer num1, Integer num2) {
-        return num1 + " * " + num2 + " = " + service.multiply(num1,num2);
-    }
-    public String division(int num1, int num2) {
-        try {
-            if (num2 == 0) {
-                return "На ноль делить нельзя";
-            }
-            return num1 + " / " + num2 + " = " + service.divide(num1, num2);
-        } catch (IllegalArgumentException e) {
-            System.out.println("На ноль делить нельзя, повторите снова");
-        } finally {
+    @GetMapping("/calculator/multiply")
+    public String multiply(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+        if (num1 == null || num2 == null) {
+            return "Один из аргументов не передан";
         }
-        return null;
+        return num1 + " * " + num2 + " = " + service.multiply(num1, num2);
     }
-}
+
+        @GetMapping("/calculator/divide")
+        public String divide(@RequestParam Integer num1, @RequestParam Integer num2) {
+            return num1 + " / " + num2 + " = " + service.divide(num1, num2);
+        }
+    }
+

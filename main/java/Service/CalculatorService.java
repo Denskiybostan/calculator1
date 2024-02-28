@@ -3,22 +3,22 @@ package Service;
 import org.springframework.stereotype.Service;
 @Service
 public class CalculatorService {
-        public int plus(int num1, int num2){
+        public int plus(Integer num1, Integer num2){
             checkNumbers(num1, num2);
             return num1 + num2;
         }
 
-        public int minus(int num1, int num2) {
+        public int minus(Integer num1, Integer num2) {
             checkNumbers(num1, num2);
             return num1 - num2;
         }
-        public int multiply(int num1, int num2) {
+        public int multiply(Integer num1, Integer num2) {
             checkNumbers(num1, num2);
             return num1 * num2;
 
         }
 
-        public int divide(int num1, int num2) {
+        public int divide(Integer num1, Integer num2) {
             checkNumbers(num1, num2);
             checkDivide(num1, num2);
             return num1 / num2;
