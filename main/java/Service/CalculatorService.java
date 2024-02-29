@@ -29,7 +29,7 @@ public class CalculatorService {
             }
         }
         private void checkDivide (Integer num1, Integer num2) {
-            if (num2 == 0 || num1 == 0) {
+            if (num2 == 0) {
                 throw new IllegalArgumentException("Делить на ноль нельзя");
             }
 
